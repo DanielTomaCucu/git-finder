@@ -1,0 +1,13 @@
+.op {
+  background: rgb(0 0 0 / 57%);
+}
+.textbg {
+    background: #d749a1;
+    background: linear-gradient(to right, #bb61be 0%, #2e68ed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.cardbg{
+  background: rgb(215,73,160);
+background: linear-gradient(90deg, rgba(215,73,160,0.10547969187675066) 0%, rgba(46,104,237,0.0578606442577031) 100%);
+}
