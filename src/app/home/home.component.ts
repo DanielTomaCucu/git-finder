@@ -4,15 +4,29 @@ import { HomeService } from './home.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-
-  constructor(private homeService: HomeService) {
- console.log('sfsdfds');
-  }
+  mostStarred: any = [];
+  mostForked: any = [];
+  constructor(private homeService: HomeService) {}
   ngOnInit() {
-    this.homeService.gettest().subscribe(data=> console.log(data))
-  }
+    this.homeService.getMostForkedRepos().subscribe((data) => {
+      this.mostForked = data.data.search.edges.sort(
+        (
+          a: { node: { forkCount: number } },
+          b: { node: { forkCount: number } }
+        ) => b.node.forkCount - a.node.forkCount
+      );
+    });
 
+    this.homeService.getMostStarredRepos().subscribe((data) => {
+      this.mostStarred = data.data.search.edges.sort(
+        (
+          a: { node: { stargazerCount: number } },
+          b: { node: { stargazerCount: number } }
+        ) => b.node.stargazerCount - a.node.stargazerCount
+      );
+    });
+  }
 }

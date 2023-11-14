@@ -2,3 +2,53 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.subMenu,
+.container,
+nav {
+  margin: 0 auto;
+  max-width: 95%;
+}
+@media (min-width: 576px) {
+  .subMenu,
+  .container,
+  nav {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .subMenu,
+  .container,
+  nav {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .subMenu,
+  .container,
+  nav {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .subMenu,
+  .container,
+  nav {
+    max-width: 1140px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .subMenu,
+  .container,
+  nav {
+    max-width: 1242px;
+  }
+}
+p {
+  margin: 0px !important;
+}

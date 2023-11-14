@@ -7,11 +7,18 @@ import { ApolloModule } from 'apollo-angular';
 import { GraphQLModule } from './graphql.module';
 import { HomeModule } from './home/home.module';
 
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, AppRoutingModule, ApolloModule, GraphQLModule ,HomeModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ApolloModule,
+    GraphQLModule,
+    HomeModule,
+    MatIconModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })
