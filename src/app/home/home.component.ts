@@ -12,20 +12,14 @@ export class HomeComponent {
   constructor(private homeService: HomeService) {}
   ngOnInit() {
     this.homeService.getMostForkedRepos().subscribe((data) => {
-      this.mostForked = data.data.search.edges.sort(
-        (
-          a: { node: { forkCount: number } },
-          b: { node: { forkCount: number } }
-        ) => b.node.forkCount - a.node.forkCount
+      this.mostForked = [...data.data.search.edges].sort(
+        (a, b) => b.node.forkCount - a.node.forkCount
       );
     });
 
     this.homeService.getMostStarredRepos().subscribe((data) => {
-      this.mostStarred = data.data.search.edges.sort(
-        (
-          a: { node: { stargazerCount: number } },
-          b: { node: { stargazerCount: number } }
-        ) => b.node.stargazerCount - a.node.stargazerCount
+      this.mostStarred = [...data.data.search.edges].sort(
+        (a, b) => b.node.stargazerCount - a.node.stargazerCount
       );
     });
   }
