@@ -31,8 +31,9 @@
     class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
   >
     <div
+      (click)="redirectToRepo(repo.node.owner.login, repo.node.name)"
       *ngFor="let repo of mostForked"
-      class="shadow-lg rounded-xl p-6 relative border-2 border-slate-100"
+      class="shadow-lg rounded-xl p-6 relative border-2 border-slate-100 hover:-translate-y-1 duration-150 cursor-pointer"
     >
       <div class="flex flex-row flex-nowrap justify-between items-center gap-3">
         <img
@@ -89,8 +90,9 @@
     class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
   >
     <div
+      (click)="redirectToRepo(repo.node.owner.login, repo.node.name)"
       *ngFor="let repo of mostStarred"
-      class="shadow-lg rounded-xl p-6 relative border-2 border-slate-100"
+      class="shadow-lg cursor-pointer rounded-xl p-6 relative border-2 border-slate-100 hover:-translate-y-1 duration-150"
     >
       <div class="flex flex-row flex-nowrap justify-between items-center gap-3">
         <img

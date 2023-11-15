@@ -8,6 +8,7 @@ import { GraphQLModule } from './graphql.module';
 import { HomeModule } from './home/home.module';
 
 import { MatIconModule } from '@angular/material/icon';
+import { SpecificRepoModule } from './specific-repo/specific-repo.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
     GraphQLModule,
     HomeModule,
     MatIconModule,
+    SpecificRepoModule
   ],
   providers: [],
   bootstrap: [AppComponent],

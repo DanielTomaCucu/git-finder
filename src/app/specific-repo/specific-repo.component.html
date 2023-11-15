@@ -1,0 +1,92 @@
+<div class="container">
+  <div  class="absolute top-5 cursor-pointer">
+    <img
+      src="../../assets/icons/back.svg"
+      class="h-9 bg-slate-100 p-2 rounded-full border-2 border-slate-200 hover:scale-110 duration-150"
+    />
+  </div>
+  <div
+    class="bg-slate-100 rounded-3xl w-full mt-20 border-2 border-slate-200"
+  >
+    <div class="flex flex-row m-5 gap-4 items-center">
+      <img
+        [src]="repoData?.user?.avatarUrl"
+        class="h-32 rounded-full w-fit shadow-md border-2"
+      />
+      <div class="flex flex-col grow">
+        <div>
+          <p class="text-3xl">{{ repoData?.user?.name }}</p>
+          <p class="text-sm">{{ repoData?.user?.bio }}</p>
+        </div>
+        <div class="mt-3 flex flex-row gap-3 flex-1">
+          <div class="flex flex-row gap-1 items-center">
+            <img src="../../assets/icons/git-commit.svg" class="h-5" />
+            <p class="text-xs">
+              {{
+                repoData?.user?.contributionsCollection.totalCommitContributions
+              }}
+            </p>
+          </div>
+          <div class="flex flex-row gap-1 items-center">
+            <img src="../../assets/icons/git-pull.svg" class="h-4" />
+            <p class="text-xs">
+              {{
+                repoData?.user?.contributionsCollection
+                  .totalPullRequestContributions
+              }}
+            </p>
+          </div>
+          <div class="flex flex-row gap-1 items-center">
+            <img src="../../assets/icons/issues.svg" class="h-4" />
+            <p class="text-xs">
+              {{
+                repoData?.user?.contributionsCollection.totalIssueContributions
+              }}
+            </p>
+          </div>
+          <div class="flex flex-row gap-1 items-center">
+            <img src="../../assets/icons/eye.svg" class="h-4" />
+            <p class="text-xs">
+              {{
+                repoData?.user?.contributionsCollection
+                  .totalPullRequestReviewContributions
+              }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <div
+        class="text-xs flex flex-row gap-2 bg-white p-3 rounded-lg shadow-sm items-center"
+      >
+        <img src="../../assets/icons/follow.svg" class="h-4" />
+        <p>Followers: {{ repoData?.user.followers.totalCount }}</p>
+        <div class="border-l-2"></div>
+        <p>Following: {{ repoData?.user.following.totalCount }}</p>
+      </div>
+    </div>
+    <div class="grid grid-cols-3 gap-3 m-4 overflow-scroll">
+      <div
+        *ngFor="let repos of repoData?.user?.repositories.edges"
+        class="bg-white p-4 rounded-lg shadow-sm"
+      >
+        <div class="flex flex-row justify-between">
+          <p class="text-lg font-light">{{ repos.node.name }}</p>
+          <div class=" flex flex-row gap-2 ">
+            <div class="flex felx-row gap-1 items-center text-xs">
+              <img src="../../assets/icons/star.svg" class="h-4" />
+              <p>{{ repos.node.stargazerCount }}</p>
+            </div>
+            <div class="flex felx-row gap-1 items-center text-xs">
+              <img src="../../assets/icons/refresh.svg" class="h-3" />
+              <p>{{ repos.node.updatedAt | date }}</p>
+            </div>
+          </div>
+        </div>
+        <p class="text-xs line-clamp-3 pt-6">{{repos.node.description}}</p>
+        <div *ngFor="let languages of repos.node.languages.edges.node">
+          <div class="h-2 w-2"> {{languages.name}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
