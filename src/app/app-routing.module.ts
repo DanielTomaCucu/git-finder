@@ -7,6 +7,13 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
+  {
+    path: 'repo/:owner/:id',
+    loadChildren: () =>
+      import('./specific-repo/specific-repo.module').then(
+        (m) => m.SpecificRepoModule
+      ),
+  },
 ];
 
 @NgModule({
