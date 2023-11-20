@@ -29,7 +29,7 @@ export class SpecificRepoComponent {
       .subscribe((data) => {
         console.log(data?.data);
         this.repoData = data.data;
-        this.ownerData = data.data || data.data;
+        this.ownerData = data.data;
       });
   }
   goBack() {

@@ -144,3 +144,81 @@ export const SPECIFIC_REPO = gql`
     }
   }
 `;
+
+
+export const ORGANIZATION_REPO = gql`
+  query GetOrganizationDetails($organization: String!, $name: String!) {
+    repository(owner: $organization, name: $name) {
+      name
+      description
+      url
+      stargazerCount
+      forkCount
+      updatedAt
+      owner {
+        login
+        avatarUrl
+      }
+      primaryLanguage {
+        name
+        color
+      }
+      languages(first: 10) {
+        edges {
+          node {
+            name
+          }
+        }
+      }
+      issues(states: OPEN) {
+        totalCount
+      }
+      pullRequests(states: OPEN) {
+        totalCount
+      }
+      licenseInfo {
+        name
+      }
+      homepageUrl
+      defaultBranchRef {
+        name
+      }
+      releases {
+        totalCount
+      }
+    }
+    organization(login: $organization) {
+      name
+      avatarUrl
+      repositories(first: 5) {
+        edges {
+          node {
+            name
+            description
+            url
+            stargazerCount
+            forkCount
+            updatedAt
+            primaryLanguage {
+              name
+              color
+            }
+            languages(first: 5) {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+      membersWithRole(first: 5) {
+        nodes {
+          login
+          avatarUrl
+        }
+      }
+    }
+  }
+`;
