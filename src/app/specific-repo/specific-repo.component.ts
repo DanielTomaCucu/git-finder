@@ -3,6 +3,8 @@ import { SpecificRepoService } from './specific-repo.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
+
+
 @Component({
   selector: 'app-specific-repo',
   templateUrl: './specific-repo.component.html',
@@ -28,8 +30,8 @@ export class SpecificRepoComponent {
       .getSpecificRepoInfo(this.owner, this.repo)
       .subscribe((data) => {
         console.log(data?.data);
-        this.repoData = data.data;
-        this.ownerData = data.data;
+        this.repoData = data.data?.user || data.data.organization;
+
       });
   }
   goBack() {

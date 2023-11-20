@@ -4,6 +4,19 @@ import { SPECIFIC_REPO, ORGANIZATION_REPO } from '../graphql/queries';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
+
+interface SpecificRepoData {
+  user?: {
+    // Define properties of user
+  };
+  organization?: {
+    // Define properties of organization
+  };
+  repository: {
+    // Define properties of repository
+  };
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,14 +26,14 @@ export class SpecificRepoService {
 
   getSpecificRepoInfo(owner: string, repo: string) {
     return this.apollo
-      .watchQuery({
+      .watchQuery<SpecificRepoData>({
         query: SPECIFIC_REPO,
         variables: { owner: owner, name: repo },
       })
       .valueChanges.pipe(
         catchError((error) => {
           this.isUser = false;
-          return this.apollo.watchQuery({
+          return this.apollo.watchQuery<SpecificRepoData>({
             query: ORGANIZATION_REPO,
             variables: { organization: owner, name: repo },
           }).valueChanges;
