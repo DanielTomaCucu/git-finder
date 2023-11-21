@@ -3,8 +3,6 @@ import { SpecificRepoService } from './specific-repo.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-
-
 @Component({
   selector: 'app-specific-repo',
   templateUrl: './specific-repo.component.html',
@@ -15,6 +13,7 @@ export class SpecificRepoComponent {
   repo: string = '';
   repoData!: any;
   ownerData!: any;
+  loading: boolean = true;
   constructor(
     private specificRepoService: SpecificRepoService,
     private route: ActivatedRoute,
@@ -26,13 +25,22 @@ export class SpecificRepoComponent {
       this.repo = params.get('id')!;
     });
 
-    this.specificRepoService
-      .getSpecificRepoInfo(this.owner, this.repo)
-      .subscribe((data) => {
-        console.log(data?.data);
-        this.repoData = data.data?.user || data.data.organization;
+   this.specificRepoService
+     .getSpecificRepoInfo(this.owner, this.repo)
+     .subscribe(({ data, loading }) => {
+       this.loading = loading;
 
-      });
+       console.log(data);
+
+
+       if (data?.user) {
+         this.repoData = data.user;
+       } else if (data?.organization) {
+         this.repoData = data.organization;
+       }
+
+     });
+
   }
   goBack() {
     this.location.back();
