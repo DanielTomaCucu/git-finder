@@ -269,3 +269,71 @@ export const ORGANIZATION_REPO = gql`
     }
   }
 `;
+
+export const USER_PROFILE = gql`
+  query GetUserProfile($username: String!) {
+    user(login: $username) {
+      login
+      name
+      avatarUrl
+      bio
+      company
+      location
+      email
+      websiteUrl
+      followers {
+        totalCount
+      }
+      following {
+        totalCount
+      }
+      starredRepositories {
+        totalCount
+      }
+      contributionsCollection {
+        totalCommitContributions
+        totalIssueContributions
+        totalPullRequestContributions
+        totalPullRequestReviewContributions
+        totalRepositoryContributions
+        restrictedContributionsCount
+        contributionCalendar {
+          totalContributions
+          weeks {
+            contributionDays {
+              contributionCount
+              date
+              weekday
+            }
+          }
+        }
+        contributionYears
+      }
+      repositories(first: 10, orderBy: { field: CREATED_AT, direction: DESC }) {
+        totalCount
+        nodes {
+          name
+          description
+          url
+          isPrivate
+          createdAt
+          updatedAt
+          stargazerCount
+          forkCount
+          primaryLanguage {
+            name
+            color
+          }
+        }
+      }
+      gists(first: 10) {
+        totalCount
+        nodes {
+          name
+          description
+          url
+        }
+      }
+    }
+  }
+`;
