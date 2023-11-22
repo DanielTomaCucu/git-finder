@@ -14,6 +14,11 @@ const routes: Routes = [
         (m) => m.SpecificRepoModule
       ),
   },
+  {
+    path: 'profile/:owner',
+    loadChildren: () =>
+      import('./my-profile/my-profile.module').then((m) => m.MyProfileModule),
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,32 @@
+<div class="container flex flex-col md:flex-row pt-10">
+  <div class="flex flex-row md:flex-col items-center content-center gap-3">
+    <img
+      [src]="userData.avatarUrl"
+      class="w-20 h-20 md:w-72 md:h-72 max-w-72 max-h-72 rounded-full border-2"
+    />
+
+    <div class="md:mt-5 justify-center">
+      <p class="font-bold text-lg md:text-3xl text-neutral-700">
+        {{ userData.name }}
+      </p>
+      <p class="text-lg md:text-3xl text-neutral-600">{{ userData.login }}</p>
+
+      <div class="flex flex-row gap-1 items-center justify-start pt-3">
+        <img
+          src="../../assets/icons/group-svgrepo-com.svg"
+          class="max-h-4 max-w-4"
+        />
+        <p class="text-sm">{{ userData?.followers?.totalCount }} followers</p>
+        <div class="w-1 h-1 rounded-full bg-neutral-800"></div>
+        <p class="text-sm">{{ userData?.following?.totalCount }} following</p>
+      </div>
+      <div class="flex flex-row gap-1 items-center justify-start">
+        <img
+          class="max-h-4 max-w-4"
+          src="../../assets/icons/pin-sharp-circle-624-svgrepo-com.svg"
+        />
+        <p class="text-sm" >{{ userData.location }}</p>
+      </div>
+    </div>
+  </div>
+</div>
