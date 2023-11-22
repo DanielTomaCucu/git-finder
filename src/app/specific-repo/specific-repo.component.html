@@ -7,20 +7,18 @@
         class="h-9 bg-slate-100 p-2 rounded-full border-2 border-slate-200 hover:scale-110 duration-150"
       />
     </div>
-    <div
-      class="bg-slate-100 rounded-3xl w-full mt-20 border-2 border-slate-200"
-    >
+    <div class="bg-slate-100 rounded-xl w-full mt-20 border-2 border-slate-200">
       <div class="grid grid-cols-1 md:grid-cols-2 m-5 gap-4 items-center">
-        <div class="flex gap-4 flex-row items-center">
+        <div class="flex gap-4 flex-col sm:flex-row items-center">
           <img
             [src]="ownerData?.avatarUrl"
             class="h-32 rounded-full w-fit shadow-md border-2"
           />
-          <div class="flex flex-col flex-wrap grow">
+          <div class="flex flex-col flex-wrap grow items-center sm:items-start">
             <div>
-              <p class="text-3xl">{{ ownerData?.name }}</p>
+              <p class="text-3xl text-center sm:text-left">{{ ownerData?.name }}</p>
 
-              <p class="text-sm">{{ ownerData?.bio }}</p>
+              <p class="text-sm text-center sm:text-left">{{ ownerData?.bio }}</p>
             </div>
             <div
               *ngIf="ownerData?.__typename === 'User'"
@@ -108,20 +106,20 @@
       </div>
     </div>
     <div
-      class="bg-slate-100 relative rounded-3xl w-full mt-2 border-2 border-slate-200 p-4"
+      class="bg-slate-100 relative rounded-xl w-full mt-2 border-2 border-slate-200 p-4 mb-10"
     >
       <div
-        class="absolute top-0 right-0 flex flex-row flex-nowrap gap-1 items-center px-2 py-1 rounded-se-3xl rounded-es-xl bg-slate-50 border-2 border-slate-100"
+        class="absolute top-0 right-0 flex flex-row flex-nowrap gap-1 items-center px-2 py-1 rounded-se-xl rounded-es-xl bg-slate-50 shadow-sm"
       >
         <img src="../../assets/icons/refresh.svg" class="h-3" />
         <p class="text-sm">{{ repoData.updatedAt | date }}</p>
       </div>
-      <div class="flex flex-row flex-nowrap gap-2 items-center">
+      <div class="flex flex-row flex-nowrap gap-2 items-center mt-4">
         <div
-          [style.background-color]="repoData.primaryLanguage.color"
+          [style.background-color]="repoData?.primaryLanguage?.color"
           class="h-3 w-3 rounded-full"
         ></div>
-        <p class="text-lg">{{ repoData.name }}</p>
+        <p class="text-xl">{{ repoData.name }}</p>
         <div class="flex flex-row gap-1 flex-nowrap">
           <p
             class="text-xs text-emerald-300 bg-emerald-50 px-1 w-fit rounded-md border-2 border-emerald-100"
@@ -143,7 +141,98 @@
           </ng-template>
         </div>
       </div>
-      <div></div>
+      <p class="pt-1">{{ repoData.description }}</p>
+      <div class="flex flex-row flex-wrap gap-x-4 gap-y-1 mt-5 items-center">
+        <div
+          class="flex flex-row flex-nowrap py-2 px-4 bg-white rounded-md gap-4 items-center w-fit"
+        >
+          <div class="flex flex-row flex-nowrap gap-1">
+            <img
+              src="../../assets/icons/git-pull.svg"
+              class="h-4 w-4 self-center"
+            />
+            <p class="text-sm">{{ repoData.openPullRequests.totalCount }}</p>
+          </div>
+          <div class="border-l-2"></div>
+          <div class="flex flex-row flex-nowrap gap-1">
+            <img
+              src="../../assets/icons/code-pull-request-closed-svgrepo-com.svg"
+              class="h-4 w-4 self-center"
+            />
+            <p class="text-sm">{{ repoData.closedPullRequests.totalCount }}</p>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-row flex-nowrap py-2 px-4 bg-white rounded-md gap-4 justify-center w-fit"
+        >
+          <div class="flex flex-row flex-nowrap gap-1">
+            <img
+              src="../../assets/icons/issues.svg"
+              class="h-4 w-4 self-center"
+            />
+            <p class="text-sm">{{ repoData.openIssues.totalCount }}</p>
+          </div>
+          <div class="border-l-2"></div>
+          <div class="flex flex-row flex-nowrap gap-1">
+            <img
+              src="../../assets/icons/issue-close-svgrepo-com.svg"
+              class="h-4 w-4 self-center"
+            />
+            <p class="text-sm">{{ repoData.closedIssues.totalCount }}</p>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-row flex-nowrap py-2 px-4 bg-white rounded-md gap-4 justify-center w-fit"
+        >
+          <div class="flex flex-row flex-nowrap gap-1">
+            <img
+              src="../../assets/icons/fork.svg"
+              class="h-4 w-4 self-center"
+            />
+            <p class="text-sm">{{ repoData.forkCount }}</p>
+          </div>
+          <div class="border-l-2"></div>
+          <div class="flex flex-row flex-nowrap gap-1">
+            <img
+              src="../../assets/icons/star.svg"
+              class="h-4 w-4 self-center"
+            />
+            <p class="text-sm">{{ repoData.stargazerCount }}</p>
+          </div>
+          <div class="border-l-2"></div>
+          <div class="flex flex-row flex-nowrap gap-1">
+            <img src="../../assets/icons/eye.svg" class="h-4 w-4 self-center" />
+            <p class="text-sm">{{ repoData.watchers.totalCount }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="mt-4 bg-white rounded-lg p-3 overflow-scroll">
+        <p>Last Branches</p>
+        <div class="flex flex-row gap-2 flex-wrap pt-2">
+          <p
+            class="px-3 py-2 bg-zinc-100 text-xs rounded-lg whitespace-nowrap"
+            *ngFor="let branch of repoData.branches.nodes"
+          >
+            {{ branch.name }}
+          </p>
+        </div>
+      </div>
+      <div
+        class="flex flex-row flex-wrap gap-2 bg-white rounded-md text-sm mt-3 p-3"
+      >
+        <div
+          *ngFor="let language of repoData.languages.edges"
+          class="flex flex-row gap-1 items-center border-2 px-1 rounded-full"
+        >
+          <div
+            [style.background-color]="language.node.color"
+            class="h-3 w-3 rounded-full"
+          ></div>
+          <p>{{ language.node.name }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </ng-template>
