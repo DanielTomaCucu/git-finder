@@ -69,27 +69,38 @@ export const SPECIFIC_REPO = gql`
       stargazerCount
       forkCount
       updatedAt
-      owner {
-        login
-        avatarUrl
+      createdAt
+      isPrivate
+      diskUsage
+      watchers {
+        totalCount
       }
-      primaryLanguage {
-        name
-        color
+
+      openIssues: issues(states: OPEN) {
+        totalCount
       }
-      languages(first: 10) {
-        edges {
-          node {
-            name
-          }
+      closedIssues: issues(states: CLOSED) {
+        totalCount
+      }
+
+      openPullRequests: pullRequests(states: OPEN) {
+        totalCount
+      }
+      closedPullRequests: pullRequests(states: CLOSED) {
+        totalCount
+      }
+
+      branches: refs(refPrefix: "refs/heads/", first: 10) {
+        nodes {
+          name
         }
       }
-      issues(states: OPEN) {
-        totalCount
+      tags: refs(refPrefix: "refs/tags/", first: 10) {
+        nodes {
+          name
+        }
       }
-      pullRequests(states: OPEN) {
-        totalCount
-      }
+
       licenseInfo {
         name
       }
@@ -100,8 +111,20 @@ export const SPECIFIC_REPO = gql`
       releases {
         totalCount
       }
-
+      primaryLanguage {
+        name
+        color
+      }
+      languages(first: 10) {
+        edges {
+          node {
+            name
+            color
+          }
+        }
+      }
     }
+
     user(login: $owner) {
       name
       bio
@@ -112,7 +135,7 @@ export const SPECIFIC_REPO = gql`
       following {
         totalCount
       }
-      repositories(first: 5) {
+      repositories(first: 6) {
         edges {
           node {
             name
@@ -129,6 +152,7 @@ export const SPECIFIC_REPO = gql`
               edges {
                 node {
                   name
+                  color
                 }
               }
             }
@@ -145,7 +169,6 @@ export const SPECIFIC_REPO = gql`
   }
 `;
 
-
 export const ORGANIZATION_REPO = gql`
   query GetOrganizationDetails($organization: String!, $name: String!) {
     repository(owner: $organization, name: $name) {
@@ -155,27 +178,38 @@ export const ORGANIZATION_REPO = gql`
       stargazerCount
       forkCount
       updatedAt
-      owner {
-        login
-        avatarUrl
+      createdAt
+      isPrivate
+      diskUsage
+      watchers {
+        totalCount
       }
-      primaryLanguage {
-        name
-        color
+
+      openIssues: issues(states: OPEN) {
+        totalCount
       }
-      languages(first: 10) {
-        edges {
-          node {
-            name
-          }
+      closedIssues: issues(states: CLOSED) {
+        totalCount
+      }
+
+      openPullRequests: pullRequests(states: OPEN) {
+        totalCount
+      }
+      closedPullRequests: pullRequests(states: CLOSED) {
+        totalCount
+      }
+
+      branches: refs(refPrefix: "refs/heads/", first: 10) {
+        nodes {
+          name
         }
       }
-      issues(states: OPEN) {
-        totalCount
+      tags: refs(refPrefix: "refs/tags/", first: 10) {
+        nodes {
+          name
+        }
       }
-      pullRequests(states: OPEN) {
-        totalCount
-      }
+
       licenseInfo {
         name
       }
@@ -186,11 +220,23 @@ export const ORGANIZATION_REPO = gql`
       releases {
         totalCount
       }
+      primaryLanguage {
+        name
+        color
+      }
+      languages(first: 10) {
+        edges {
+          node {
+            name
+            color
+          }
+        }
+      }
     }
     organization(login: $organization) {
       name
       avatarUrl
-      repositories(first: 5) {
+      repositories(first: 6) {
         edges {
           node {
             name
@@ -207,6 +253,7 @@ export const ORGANIZATION_REPO = gql`
               edges {
                 node {
                   name
+                  color
                 }
               }
             }

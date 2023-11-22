@@ -25,22 +25,21 @@ export class SpecificRepoComponent {
       this.repo = params.get('id')!;
     });
 
-   this.specificRepoService
-     .getSpecificRepoInfo(this.owner, this.repo)
-     .subscribe(({ data, loading }) => {
-       this.loading = loading;
+    this.specificRepoService
+      .getSpecificRepoInfo(this.owner, this.repo)
+      .subscribe(({ data, loading }) => {
+        this.loading = loading;
 
-       console.log(data);
+        console.log(data.repository);
 
-
-       if (data?.user) {
-         this.repoData = data.user;
-       } else if (data?.organization) {
-         this.repoData = data.organization;
-       }
-
-     });
-
+        if (data?.user) {
+          this.ownerData = data.user;
+          this.repoData = data.repository;
+        } else if (data?.organization) {
+          this.ownerData = data.organization;
+          this.repoData = data.repository;
+        }
+      });
   }
   goBack() {
     this.location.back();
