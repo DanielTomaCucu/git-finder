@@ -1,16 +1,19 @@
 <div class="container flex flex-col md:flex-row pt-10 gap-5">
   <div class="flex flex-row md:flex-col items-center content-center gap-3">
-    <div class=" w-20  md:w-60  max-w-72 max-h-72 ">
-    <img
-      [src]="userData.avatarUrl"
-      class="w-20 h-20 md:w-60 md:h-60  lg:max-w-72  rounded-full border-2"
-    /></div>
+    <div class="w-20 md:w-60 max-w-72 max-h-72">
+      <img
+        [src]="userData.avatarUrl"
+        class="w-20 h-20 md:w-60 md:h-60 lg:max-w-72 rounded-full border-2"
+      />
+    </div>
 
     <div class="md:mt-5 justify-center">
       <p class="font-bold text-lg md:text-xl xl:text-2xl text-neutral-700">
         {{ userData.name }}
       </p>
-      <p class="text-lg md:text-xl xl:text-2xl text-neutral-600">{{ userData.login }}</p>
+      <p class="text-lg md:text-xl xl:text-2xl text-neutral-600">
+        {{ userData.login }}
+      </p>
 
       <div class="flex flex-row gap-1 items-center justify-start pt-3">
         <img
@@ -30,18 +33,30 @@
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 w-full">
+  <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 w-full">
+    <div
+      [routerLink]="['/profile', userData.login, 'repos']"
+      class="hover:bg-slate-100 cursor-pointer md:hidden group col-start-1 col-end-2 lg:col-end-3 border p-2 text-center rounded-md bg-slate-50 flex flex-row items-center justify-center gap-2 hover:shadow-sm"
+    >
+      <p>View all repositories</p>
+      <img
+        src="../../assets//icons/arrow-right-circle-svgrepo-com.svg"
+        class="h-4 w-4 self-center group-hover:translate-x-1 duration-150"
+      />
+    </div>
     <div
       *ngFor="let repo of userData?.repositories?.nodes"
-      class="border  rounded-md p-5"
+      class="border rounded-md p-5"
     >
-      <div class="grid grid-cols-1 gap-5  place-content-between">
+      <div class="grid grid-cols-1 gap-5 place-content-between">
         <div class="flex flex-row flex-wrap gap-1 items-center">
           <img
             src="../../assets/icons/git-repository-svgrepo-com.svg"
             class="max-h-4 max-w-4"
           />
-          <p class=" text-sky-700 font-bold text-md">{{ repo.name }}</p>
+          <p class="text-sky-600 font-bold text-md">
+            <a [href]="repo.url">{{ repo.name }}</a>
+          </p>
           <p
             *ngIf="repo.isPrivate; else public"
             class="text-xs border px-1 rounded-full border-gray-300 text-gray-500"
@@ -49,7 +64,9 @@
             Private
           </p>
           <ng-template #public>
-            <p class="text-xs border px-1 rounded-full border-gray-300 text-gray-500">
+            <p
+              class="text-xs border px-1 rounded-full border-gray-300 text-gray-500"
+            >
               Public
             </p>
           </ng-template>
@@ -62,6 +79,16 @@
           <p class="text-sm">{{ repo.primaryLanguage.name }}</p>
         </div>
       </div>
+    </div>
+    <div
+      [routerLink]="['/profile', userData.login, 'repos']"
+      class="cursor-pointer hidden group col-start-1 col-end-2 lg:col-end-3 border p-2 text-center rounded-md bg-slate-50 hover:bg-slate-100 md:flex flex-row items-center justify-center gap-2 hover:shadow-sm"
+    >
+      <p>View all repositories</p>
+      <img
+        src="../../assets//icons/arrow-right-circle-svgrepo-com.svg"
+        class="h-4 w-4 self-center group-hover:translate-x-1 duration-150"
+      />
     </div>
   </div>
 </div>
