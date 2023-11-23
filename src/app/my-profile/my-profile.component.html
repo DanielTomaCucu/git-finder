@@ -1,15 +1,16 @@
-<div class="container flex flex-col md:flex-row pt-10">
+<div class="container flex flex-col md:flex-row pt-10 gap-5">
   <div class="flex flex-row md:flex-col items-center content-center gap-3">
+    <div class=" w-20  md:w-60  max-w-72 max-h-72 ">
     <img
       [src]="userData.avatarUrl"
-      class="w-20 h-20 md:w-72 md:h-72 max-w-72 max-h-72 rounded-full border-2"
-    />
+      class="w-20 h-20 md:w-60 md:h-60  lg:max-w-72  rounded-full border-2"
+    /></div>
 
     <div class="md:mt-5 justify-center">
-      <p class="font-bold text-lg md:text-3xl text-neutral-700">
+      <p class="font-bold text-lg md:text-xl xl:text-2xl text-neutral-700">
         {{ userData.name }}
       </p>
-      <p class="text-lg md:text-3xl text-neutral-600">{{ userData.login }}</p>
+      <p class="text-lg md:text-xl xl:text-2xl text-neutral-600">{{ userData.login }}</p>
 
       <div class="flex flex-row gap-1 items-center justify-start pt-3">
         <img
@@ -25,7 +26,41 @@
           class="max-h-4 max-w-4"
           src="../../assets/icons/pin-sharp-circle-624-svgrepo-com.svg"
         />
-        <p class="text-sm" >{{ userData.location }}</p>
+        <p class="text-sm">{{ userData.location }}</p>
+      </div>
+    </div>
+  </div>
+  <div class="grid grid-cols-1 gap-3 md:grid-cols-2 w-full">
+    <div
+      *ngFor="let repo of userData?.repositories?.nodes"
+      class="border  rounded-md p-5"
+    >
+      <div class="grid grid-cols-1 gap-5  place-content-between">
+        <div class="flex flex-row flex-wrap gap-1 items-center">
+          <img
+            src="../../assets/icons/git-repository-svgrepo-com.svg"
+            class="max-h-4 max-w-4"
+          />
+          <p class=" text-sky-700 font-bold text-md">{{ repo.name }}</p>
+          <p
+            *ngIf="repo.isPrivate; else public"
+            class="text-xs border px-1 rounded-full border-gray-300 text-gray-500"
+          >
+            Private
+          </p>
+          <ng-template #public>
+            <p class="text-xs border px-1 rounded-full border-gray-300 text-gray-500">
+              Public
+            </p>
+          </ng-template>
+        </div>
+        <div class="flex flex-row flex-nowrap gap-1 items-center">
+          <div
+            [style.background-color]="repo.primaryLanguage.color"
+            class="h-3 w-3 rounded-full"
+          ></div>
+          <p class="text-sm">{{ repo.primaryLanguage.name }}</p>
+        </div>
       </div>
     </div>
   </div>
