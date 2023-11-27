@@ -1,1 +1,51 @@
-<p>user-repos works!</p>
+<div class="container flex flex-col md:flex-row pt-10 gap-5">
+  <app-my-profile-bio></app-my-profile-bio>
+  <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 w-full">
+    <div
+      *ngFor="let repo of userRepos?.repositories?.nodes"
+      class="border rounded-md p-5"
+    >
+      <div class="grid grid-cols-1 gap-5 place-content-between">
+        <div class="flex flex-row flex-wrap gap-1 items-center">
+          <img
+            src="../../assets/icons/git-repository-svgrepo-com.svg"
+            class="max-h-4 max-w-4"
+          />
+          <p class="text-sky-600 font-bold text-md">
+            <a [href]="repo.url">{{ repo.name }}</a>
+          </p>
+          <p
+            *ngIf="repo.isPrivate; else public"
+            class="text-xs border px-1 rounded-full border-red-300 text-red-400 bg-red-50"
+          >
+            Private
+          </p>
+          <ng-template #public>
+            <p
+              class="text-xs border px-1 rounded-full border-gray-300 text-gray-500"
+            >
+              Public
+            </p>
+          </ng-template>
+        </div>
+        <p class="text-xs" *ngIf="repo.description">{{ repo.description }}</p>
+        <div class="flex flex-row gap-1 flex-wrap">
+          <p
+            class="bg-sky-50 text-xs border border-sky-200 text-sky-500 px-2 py-1 rounded-full whitespace-nowrap"
+            *ngFor="let topic of repo.repositoryTopics.nodes"
+          >
+            {{ topic.topic.name }}
+          </p>
+        </div>
+
+        <div class="flex flex-row flex-nowrap gap-1 items-center">
+          <div
+            [style.background-color]="repo.primaryLanguage?.color"
+            class="h-3 w-3 rounded-full"
+          ></div>
+          <p class="text-sm">{{ repo.primaryLanguage?.name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

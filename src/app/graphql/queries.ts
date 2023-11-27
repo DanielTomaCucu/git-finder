@@ -274,19 +274,6 @@ export const USER_PROFILE = gql`
   query GetUserProfile($username: String!) {
     user(login: $username) {
       login
-      name
-      avatarUrl
-      bio
-      company
-      location
-      email
-      websiteUrl
-      followers {
-        totalCount
-      }
-      following {
-        totalCount
-      }
       starredRepositories {
         totalCount
       }
@@ -309,7 +296,7 @@ export const USER_PROFILE = gql`
         }
         contributionYears
       }
-      repositories(first: 10, orderBy: { field: CREATED_AT, direction: DESC }) {
+      repositories(first: 6, orderBy: { field: CREATED_AT, direction: DESC }) {
         totalCount
         nodes {
           name
@@ -326,12 +313,107 @@ export const USER_PROFILE = gql`
           }
         }
       }
-      gists(first: 10) {
+      gists(first: 6) {
         totalCount
         nodes {
           name
           description
           url
+        }
+      }
+    }
+  }
+`;
+
+export const USER_PROFILE_BIO = gql`
+  query GetUserProfile($username: String!) {
+    user(login: $username) {
+      login
+      name
+      avatarUrl
+      bio
+      company
+      location
+      email
+      websiteUrl
+      followers {
+        totalCount
+      }
+      following {
+        totalCount
+      }
+    }
+  }
+`;
+export const USER_REPOS = gql`
+  query GetUserRepositories($username: String!, $first: Int!) {
+    user(login: $username) {
+      repositories(
+        first: $first
+        orderBy: { field: CREATED_AT, direction: DESC }
+      ) {
+        totalCount
+        nodes {
+          name
+          description
+          url
+          isPrivate
+          createdAt
+          updatedAt
+          stargazerCount
+          forkCount
+          primaryLanguage {
+            name
+            color
+          }
+          repositoryTopics(first: 10) {
+            nodes {
+              topic {
+                name
+              }
+            }
+          }
+          languages(first: 5) {
+            edges {
+              node {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const ORG_REPOS = gql`
+  query GetOrganizationRepositories($organization: String!, $first: Int!) {
+    organization(login: $organization) {
+      repositories(
+        first: $first
+        orderBy: { field: CREATED_AT, direction: DESC }
+      ) {
+        totalCount
+        nodes {
+          name
+          description
+          url
+          isPrivate
+          createdAt
+          updatedAt
+          stargazerCount
+          forkCount
+          primaryLanguage {
+            name
+            color
+          }
+          languages(first: 5) {
+            edges {
+              node {
+                name
+              }
+            }
+          }
         }
       }
     }
