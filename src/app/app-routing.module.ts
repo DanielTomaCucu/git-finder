@@ -15,14 +15,14 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'profile/:owner',
-    loadChildren: () =>
-      import('./my-profile/my-profile.module').then((m) => m.MyProfileModule),
-  },
-  {
     path: 'profile/:owner/repos',
     loadChildren: () =>
       import('./user-repos/user-repos.module').then((m) => m.UserReposModule),
+  },
+  {
+    path: 'profile/:owner',
+    loadChildren: () =>
+      import('./my-profile/my-profile.module').then((m) => m.MyProfileModule),
   },
 ];
 
