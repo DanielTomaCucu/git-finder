@@ -8,7 +8,9 @@ import { Component, Input } from '@angular/core';
 })
 export class UserContribuitionComponent {
   @Input() contribuitions: any;
-
+  ngOnInit() {
+  console.log(this.contribuitions)
+}
   getWeeks() {
     return this.contribuitions.contributionCalendar?.weeks;
   }
@@ -17,7 +19,6 @@ export class UserContribuitionComponent {
     return week.contributionDays;
   }
   getStyleForDay(day: any) {
-    console.log(day);
     let backgroundColor;
     switch (true) {
       case day.contributionCount > 8:

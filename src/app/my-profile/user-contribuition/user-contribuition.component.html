@@ -1,12 +1,62 @@
-<div class="relative">
-  <div class="flex flex-row gap-1 pt-5">
-    <div class="flex flex-col gap-1" *ngFor="let week of getWeeks()">
-      <div *ngIf="shouldDisplayMonth(week)" class="absolute top-0 text-xs">{{ getMonthForWeek(week) }}</div>
-      <div
-        class="w-3 h-3 rounded"
-        *ngFor="let day of getDays(week)"
-        [ngStyle]="getStyleForDay(day)"
-      ></div>
+<div class="flex flex-row pb-3">
+  <div>
+    <p class="text-sm">
+      Total contributions in one year
+      <span>{{ contribuitions.contributionCalendar.totalContributions }}</span>
+    </p>
+  </div>
+</div>
+<div class="flex flex-col 2xl:flex-row gap-2">
+  <div class="relative overflow-scroll flex-grow">
+    <div class="flex flex-row gap-1 pt-5">
+      <div class="flex flex-col gap-1" *ngFor="let week of getWeeks()">
+        <div *ngIf="shouldDisplayMonth(week)" class="absolute top-0 text-xs">
+          {{ getMonthForWeek(week) }}
+        </div>
+        <div
+          class="w-3 h-3 rounded"
+          *ngFor="let day of getDays(week)"
+          [ngStyle]="getStyleForDay(day)"
+          matTooltip="day.contributionCount"
+        ></div>
+      </div>
+    </div>
+  </div>
+  <div class="flex flex-row 2xl:flex-col gap-5 2xl:gap-1 border p-2 rounded-md">
+    <div
+      class="flex flex-row flex-none gap-1 items-center justify-evenly bg-slate-50 rounded py-1 px-3 2xl:py-0"
+    >
+      <img src="../../../assets/icons/git-pull.svg" class="h-4 w-4" />
+      <p class="text-sm">{{ contribuitions.totalPullRequestContributions }}</p>
+    </div>
+    <div
+      class="flex flex-row flex-none gap-1 items-center justify-evenly bg-slate-50 rounded py-1 px-3 2xl:py-0"
+    >
+      <img src="../../../assets/icons/git-commit.svg" class="h-4 w-4" />
+      <p class="text-sm">{{ contribuitions.totalCommitContributions }}</p>
+    </div>
+    <div
+      class="flex flex-row flex-none gap-1 items-center justify-evenly bg-slate-50 rounded py-1 px-3 2xl:py-0"
+    >
+      <img src="../../../assets/icons/eye.svg" class="h-4 w-4" />
+      <p class="text-sm">
+        {{ contribuitions.totalPullRequestReviewContributions }}
+      </p>
+    </div>
+    <div
+      class="flex flex-row flex-none gap-1 items-center justify-evenly bg-slate-50 rounded py-1 px-3 2xl:py-0"
+    >
+      <img
+        src="../../../assets/icons/git-repository-svgrepo-com.svg"
+        class="h-4 w-4"
+      />
+      <p class="text-sm">{{ contribuitions.totalRepositoryContributions }}</p>
+    </div>
+    <div
+      class="flex flex-row flex-none gap-1 items-center justify-evenly bg-slate-50 rounded py-1 px-3 2xl:py-0"
+    >
+      <img src="../../../assets/icons/issues.svg" class="h-4 w-4" />
+      <p class="text-sm">{{ contribuitions.totalIssueContributions }}</p>
     </div>
   </div>
 </div>
