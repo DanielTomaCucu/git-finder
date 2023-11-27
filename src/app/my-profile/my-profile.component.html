@@ -1,5 +1,5 @@
 <div class="container flex flex-col md:flex-row pt-10 gap-5">
-  <app-my-profile-bio ></app-my-profile-bio>
+  <app-my-profile-bio></app-my-profile-bio>
   <div class="grid grid-cols-1 gap-3 lg:grid-cols-2 w-full">
     <div
       [routerLink]="['/profile', userData.login, 'repos']"
@@ -57,5 +57,11 @@
         class="h-4 w-4 self-center group-hover:translate-x-1 duration-150"
       />
     </div>
+
+    <app-user-contribuition
+      *ngIf="userData"
+      class="col-start-1 col-end-2 lg:col-end-3 overflow-scroll"
+      [contribuitions]="userData.contributionsCollection"
+    ></app-user-contribuition>
   </div>
 </div>

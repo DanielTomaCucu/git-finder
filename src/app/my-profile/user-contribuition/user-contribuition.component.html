@@ -1,0 +1,12 @@
+<div class="relative">
+  <div class="flex flex-row gap-1 pt-5">
+    <div class="flex flex-col gap-1" *ngFor="let week of getWeeks()">
+      <div *ngIf="shouldDisplayMonth(week)" class="absolute top-0 text-xs">{{ getMonthForWeek(week) }}</div>
+      <div
+        class="w-3 h-3 rounded"
+        *ngFor="let day of getDays(week)"
+        [ngStyle]="getStyleForDay(day)"
+      ></div>
+    </div>
+  </div>
+</div>

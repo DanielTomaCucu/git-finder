@@ -18,7 +18,6 @@ export class MyProfileBioComponent {
     this.route.paramMap.subscribe((params) => {
       this.user = params.get('owner')!;
     });
-    console.log(this.user)
     this.myProfileBioService.getUserpeofileBio(this.user).subscribe((data) => {
       this.userData = data.data.user
     });
