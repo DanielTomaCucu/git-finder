@@ -19,7 +19,6 @@ export class MyProfileComponent {
       this.user = params.get('owner')!;
     });
     this.myProfileService.getUserData(this.user).subscribe((data) => {
-      console.log(data.data.user);
       this.userData = data.data.user;
     });
   }
