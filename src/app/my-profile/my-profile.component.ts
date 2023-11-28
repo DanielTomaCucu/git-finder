@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MyProfileComponent {
   user: string = '';
   userData: any = '';
+  loading: boolean = true;
   constructor(
     private myProfileService: MyProfileService,
     private route: ActivatedRoute
@@ -18,8 +19,14 @@ export class MyProfileComponent {
     this.route.paramMap.subscribe((params) => {
       this.user = params.get('owner')!;
     });
-    this.myProfileService.getUserData(this.user).subscribe((data) => {
-      this.userData = data.data.user;
+  this.myProfileService
+    .getUserData(this.user)
+    .subscribe(({ data, loading }) => {
+      if (data && data.user) {
+        this.userData = data.user;
+      }
+      this.loading = loading;
     });
+
   }
 }
