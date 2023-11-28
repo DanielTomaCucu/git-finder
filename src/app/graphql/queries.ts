@@ -419,3 +419,24 @@ export const ORG_REPOS = gql`
     }
   }
 `;
+export const SEARCH_GITHUB = gql`
+  query SearchGitHub($query: String!) {
+    search(query: $query, type: USER, first: 20) {
+      edges {
+        node {
+          __typename
+          ... on User {
+            login
+            avatarUrl
+            name
+          }
+          ... on Organization {
+            login
+            avatarUrl
+            name
+          }
+        }
+      }
+    }
+  }
+`;
