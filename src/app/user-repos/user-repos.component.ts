@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 export class UserReposComponent {
   user: string = '';
   userRepos: any = '';
+  loading: boolean = true;
   constructor(
     private userReposService: UserReposService,
     private route: ActivatedRoute
@@ -18,9 +19,13 @@ export class UserReposComponent {
     this.route.paramMap.subscribe((params) => {
       this.user = params.get('owner')!;
     });
-    this.userReposService.getAllRepos(this.user).subscribe((data) => {
-      console.log(data.data.user);
-      this.userRepos = data.data.user;
-    });
+    this.userReposService
+      .getAllRepos(this.user)
+      .subscribe(({ data, loading }) => {
+        if (data && data.user) {
+          this.userRepos = data.user;
+          this.loading = loading;
+        }
+      });
   }
 }
