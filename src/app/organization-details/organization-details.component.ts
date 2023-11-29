@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { OrganizationDetailsService } from './organization-details.service';
 import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-organization-details',
@@ -10,9 +11,11 @@ import { ActivatedRoute } from '@angular/router';
 export class OrganizationDetailsComponent {
   owner: string = '';
   orgDetails: any = '';
+  title: string = '';
   constructor(
     private organizationDetailsService: OrganizationDetailsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private titleService: Title
   ) {}
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -24,5 +27,6 @@ export class OrganizationDetailsComponent {
         console.log(data.data.organization);
         this.orgDetails = data.data.organization;
       });
+    this.titleService.setTitle(this.owner + ' ·  GitHub');
   }
 }

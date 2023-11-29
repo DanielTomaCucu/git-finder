@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { HomeService } from './home.service';
 import { Route, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +20,8 @@ export class HomeComponent {
   constructor(
     private homeService: HomeService,
     private router: Router,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private titleService: Title
   ) {}
 
   ngOnInit() {
@@ -44,6 +46,7 @@ export class HomeComponent {
       }
       this.loading = loading;
     });
+    this.titleService.setTitle('Home \u00B7 GitHub')
   }
 
   redirectToRepo(owner: string, repo: string) {
