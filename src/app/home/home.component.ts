@@ -56,6 +56,7 @@ export class HomeComponent {
       (result) => {
         this.searchResults = result.data.search.edges;
         this.searchError = null;
+        console.log(result.data.search.edges);
       },
       (error) => {
         this.searchError = 'Error occurred while searching.';
@@ -66,5 +67,15 @@ export class HomeComponent {
   handleClickOutside() {
     this.isDivVisible = false;
     this.cdr.detectChanges();
+  }
+
+  getRoute(node: any): string[] {
+    if (node.__typename === 'User') {
+      return ['/profile', node.login];
+    } else if (node.__typename === 'Organization') {
+      return ['organization', node.login];
+    } else {
+      return [''];
+    }
   }
 }

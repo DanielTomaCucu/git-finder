@@ -43,10 +43,10 @@
           </div>
           <div class="flex flex-row flex-nowrap gap-1 items-center">
             <div
-              [style.background-color]="repo.primaryLanguage.color"
+              [style.background-color]="repo?.primaryLanguage?.color"
               class="h-3 w-3 rounded-full"
             ></div>
-            <p class="text-sm">{{ repo.primaryLanguage.name }}</p>
+            <p class="text-sm">{{ repo.primaryLanguage?.name }}</p>
           </div>
         </div>
       </div>
