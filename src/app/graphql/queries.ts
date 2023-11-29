@@ -440,3 +440,50 @@ export const SEARCH_GITHUB = gql`
     }
   }
 `;
+export const ORGANIZATION_DETAILS = gql`
+  query GetOrganizationDetails($organization: String!) {
+    organization(login: $organization) {
+      name
+      login
+      avatarUrl
+      description
+      websiteUrl
+      location
+      email
+      isVerified
+      createdAt
+
+      membersWithRole(first: 20) {
+        totalCount
+        nodes {
+          login
+          name
+          avatarUrl
+        }
+      }
+      repositories(first: 10, orderBy: { field: STARGAZERS, direction: DESC }) {
+        totalCount
+        nodes {
+          name
+          description
+          url
+          isPrivate
+          stargazerCount
+          forkCount
+          createdAt
+          updatedAt
+          issues(states: OPEN) {
+            totalCount
+          }
+          pullRequests(states: [OPEN, CLOSED, MERGED]) {
+            totalCount
+          }
+          primaryLanguage {
+            name
+            color
+          }
+        }
+      }
+    }
+  }
+`;
