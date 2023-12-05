@@ -12,6 +12,7 @@ export class OrganizationDetailsComponent {
   owner: string = '';
   orgDetails: any = '';
   title: string = '';
+  loading: boolean = true;
   constructor(
     private organizationDetailsService: OrganizationDetailsService,
     private route: ActivatedRoute,
@@ -23,9 +24,12 @@ export class OrganizationDetailsComponent {
     });
     this.organizationDetailsService
       .getOrganizationData(this.owner)
-      .subscribe((data) => {
-        console.log(data.data.organization);
-        this.orgDetails = data.data.organization;
+      .subscribe(({ data, loading }) => {
+        if (data && data.organization) {
+          console.log(data.organization);
+          this.orgDetails = data.organization;
+        }
+        this.loading = loading;
       });
     this.titleService.setTitle(this.owner + ' ·  GitHub');
   }

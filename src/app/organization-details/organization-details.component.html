@@ -1,118 +1,128 @@
-<div class="container pt-10">
-  <div
-    class="flex flex-col md:flex-row items-center justify-center md:justify-start flex-nowrap gap-x-10 gap-y-2"
-  >
-    <div class="w-20 md:w-40 max-w-40 max-h-40 place-self-center">
-      <img
-        [src]="orgDetails?.avatarUrl"
-        class="w-20 h-20 md:w-40 md:h-40 rounded-md border-2"
-      />
-    </div>
-    <div class="flex flex-col gap-3">
-      <div
-        class="md:mt-5 justify-center md:justify-start flex-col items-center flex md:flex-row gap-x-5 flex-wrap"
-      >
-        <p class="font-bold text-lg md:text-xl xl:text-2xl text-neutral-700">
-          {{ orgDetails?.name }}
-        </p>
-
-        <div
-          *ngIf="orgDetails?.websiteUrl"
-          class="flex flex-row gap-1 items-center justify-start"
-        >
-          <img
-            class="max-h-4 max-w-4"
-            src="../../assets/icons/browser-svgrepo-com.svg"
-          />
-          <p class="text-sm">{{ orgDetails?.websiteUrl }}</p>
-        </div>
-
-        <div
-          *ngIf="orgDetails?.email"
-          class="flex flex-row gap-1 items-center justify-start"
-        >
-          <img class="max-h-4 max-w-4" src="../../assets/icons/email.svg" />
-          <p class="text-sm">{{ orgDetails?.email }}</p>
-        </div>
-      </div>
-      <div class="flex flex-row flex-wrap gap-1 items-center justify-center">
-        <p class="text-neutral-900 text-sm">People:</p>
-        <div *ngFor="let user of orgDetails?.membersWithRole?.nodes" class=" ">
-          <img [src]="user?.avatarUrl" class="h-7 w-7 rounded-full" />
-        </div>
-        <p
-          class="text-sm border rounded-md px-2 whitespace-nowrap text-slate-900 bg-slate-50"
-        >
-          and other {{ orgDetails?.membersWithRole?.totalCount }}
-        </p>
-      </div>
-    </div>
-  </div>
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-1 my-10 ">
+<app-skeleton-loader *ngIf="loading; else data"></app-skeleton-loader>
+<ng-template #data>
+  <div class="container pt-10">
     <div
-      *ngFor="let repo of orgDetails?.repositories?.nodes"
-      class="border rounded-md p-5"
+      class="flex flex-col md:flex-row items-center justify-center md:justify-start flex-nowrap gap-x-10 gap-y-2"
     >
-      <div class="grid grid-cols-1 gap-5 place-content-between">
-        <div class="flex flex-row flex-wrap gap-1 items-center">
-          <img
-            src="../../assets/icons/git-repository-svgrepo-com.svg"
-            class="max-h-4 max-w-4"
-          />
-          <p class="text-sky-600 font-bold text-md">
-            <a [href]="repo.url">{{ repo?.name }}</a>
+      <div class="w-20 md:w-40 max-w-40 max-h-40 place-self-center">
+        <img
+          [src]="orgDetails?.avatarUrl"
+          class="w-20 h-20 md:w-40 md:h-40 rounded-md border-2"
+        />
+      </div>
+      <div class="flex flex-col gap-3">
+        <div
+          class="md:mt-5 justify-center md:justify-start flex-col items-center flex md:flex-row gap-x-5 flex-wrap"
+        >
+          <p class="font-bold text-lg md:text-xl xl:text-2xl text-neutral-700">
+            {{ orgDetails?.name }}
           </p>
-          <p
-            *ngIf="repo.isPrivate; else public"
-            class="text-xs border px-1 rounded-full border-red-300 text-red-400 bg-red-50"
+
+          <div
+            *ngIf="orgDetails?.websiteUrl"
+            class="flex flex-row gap-1 items-center justify-start"
           >
-            Private
+            <img
+              class="max-h-4 max-w-4"
+              src="../../assets/icons/browser-svgrepo-com.svg"
+            />
+            <p class="text-sm">{{ orgDetails?.websiteUrl }}</p>
+          </div>
+
+          <div
+            *ngIf="orgDetails?.email"
+            class="flex flex-row gap-1 items-center justify-start"
+          >
+            <img class="max-h-4 max-w-4" src="../../assets/icons/email.svg" />
+            <p class="text-sm">{{ orgDetails?.email }}</p>
+          </div>
+        </div>
+        <div class="flex flex-row flex-wrap gap-1 items-center justify-center">
+          <p class="text-neutral-900 text-sm">People:</p>
+          <div
+            *ngFor="let user of orgDetails?.membersWithRole?.nodes"
+            class=" "
+          >
+            <img [src]="user?.avatarUrl" class="h-7 w-7 rounded-full" />
+          </div>
+          <p
+            class="text-sm border rounded-md px-2 whitespace-nowrap text-slate-900 bg-slate-50"
+          >
+            and other {{ orgDetails?.membersWithRole?.totalCount }}
           </p>
-          <ng-template #public>
-            <p
-              class="text-xs border px-1 rounded-full border-gray-300 text-gray-500"
-            >
-              Public
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1 my-10">
+      <div
+        *ngFor="let repo of orgDetails?.repositories?.nodes"
+        class="border rounded-md p-5"
+      >
+        <div class="grid grid-cols-1 gap-5 place-content-between">
+          <div class="flex flex-row flex-wrap gap-1 items-center">
+            <img
+              src="../../assets/icons/git-repository-svgrepo-com.svg"
+              class="max-h-4 max-w-4"
+            />
+            <p class="text-sky-600 font-bold text-md">
+              <a [href]="repo.url">{{ repo?.name }}</a>
             </p>
-          </ng-template>
-        </div>
-        <p class="text-xs" *ngIf="repo?.description">{{ repo?.description }}</p>
-        <div class="flex flex-row gap-1 flex-wrap">
-          <p
-            class="bg-sky-50 text-xs border border-sky-200 text-sky-500 px-2 py-1 rounded-full whitespace-nowrap"
-            *ngFor="let topic of repo.repositoryTopics?.nodes"
-          >
-            {{ topic?.topic.name }}
+            <p
+              *ngIf="repo.isPrivate; else public"
+              class="text-xs border px-1 rounded-full border-red-300 text-red-400 bg-red-50"
+            >
+              Private
+            </p>
+            <ng-template #public>
+              <p
+                class="text-xs border px-1 rounded-full border-gray-300 text-gray-500"
+              >
+                Public
+              </p>
+            </ng-template>
+          </div>
+          <p class="text-xs" *ngIf="repo?.description">
+            {{ repo?.description }}
           </p>
-        </div>
-        <div class="flex flex-row gap-3 flex-wrap text-neutral-800">
-          <div class="flex flex-row flex-nowrap gap-1 items-center">
-            <div
-              [style.background-color]="repo?.primaryLanguage?.color"
-              class="h-3 w-3 rounded-full"
-            ></div>
-            <p class="text-xs">{{ repo?.primaryLanguage?.name }}</p>
+          <div class="flex flex-row gap-1 flex-wrap">
+            <p
+              class="bg-sky-50 text-xs border border-sky-200 text-sky-500 px-2 py-1 rounded-full whitespace-nowrap"
+              *ngFor="let topic of repo.repositoryTopics?.nodes"
+            >
+              {{ topic?.topic.name }}
+            </p>
           </div>
+          <div class="flex flex-row gap-3 flex-wrap text-neutral-800">
+            <div class="flex flex-row flex-nowrap gap-1 items-center">
+              <div
+                [style.background-color]="repo?.primaryLanguage?.color"
+                class="h-3 w-3 rounded-full"
+              ></div>
+              <p class="text-xs">{{ repo?.primaryLanguage?.name }}</p>
+            </div>
 
-          <div class="flex flex-row flex-nowrap gap-1 items-center">
-            <img src="../../assets/icons/star.svg" class="h-4 w-4" />
-            <p class="text-xs">{{ repo?.stargazerCount | number }}</p>
-          </div>
+            <div class="flex flex-row flex-nowrap gap-1 items-center">
+              <img src="../../assets/icons/star.svg" class="h-4 w-4" />
+              <p class="text-xs">{{ repo?.stargazerCount | number }}</p>
+            </div>
 
-          <div class="flex flex-row flex-nowrap gap-1 items-center">
-            <img src="../../assets/icons/fork.svg" class="h-4 w-4" />
-            <p class="text-xs">{{ repo?.stargazerCount | number }}</p>
-          </div>
-          <div class="flex flex-row flex-nowrap gap-1 items-center">
-            <img src="../../assets/icons/issues.svg" class="h-4 w-4" />
-            <p class="text-xs">{{ repo?.issues?.totalCount | number }}</p>
-          </div>
-          <div class="flex flex-row flex-nowrap gap-1 items-center">
-            <img src="../../assets/icons/git-pull.svg" class="h-4 w-4" />
-            <p class="text-xs">{{ repo?.pullRequests?.totalCount | number }}</p>
+            <div class="flex flex-row flex-nowrap gap-1 items-center">
+              <img src="../../assets/icons/fork.svg" class="h-4 w-4" />
+              <p class="text-xs">{{ repo?.stargazerCount | number }}</p>
+            </div>
+            <div class="flex flex-row flex-nowrap gap-1 items-center">
+              <img src="../../assets/icons/issues.svg" class="h-4 w-4" />
+              <p class="text-xs">{{ repo?.issues?.totalCount | number }}</p>
+            </div>
+            <div class="flex flex-row flex-nowrap gap-1 items-center">
+              <img src="../../assets/icons/git-pull.svg" class="h-4 w-4" />
+              <p class="text-xs">
+                {{ repo?.pullRequests?.totalCount | number }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>
