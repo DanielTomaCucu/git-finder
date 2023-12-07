@@ -1,6 +1,5 @@
-<!-- <p>Bearer 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</p> -->
 
-<div class="relative">
+<div class="relative pb-10">
   <div class="absolute top-3 right-3">
     <button
       class="button-85"
@@ -156,9 +155,9 @@
   <div *ngIf="loading; else starredRepo">
     <app-skeleton-loader-home></app-skeleton-loader-home>
   </div>
-  <ng-template #starredRepo>
+  <ng-template #starredRepo >
     <div
-      class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+      class="grid grid-flow-row grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-10"
     >
       <div
         (click)="redirectToRepo(repo.node.owner.login, repo.node.name)"
