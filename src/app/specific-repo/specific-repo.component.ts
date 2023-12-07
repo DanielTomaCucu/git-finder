@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { SpecificRepoService } from './specific-repo.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 @Component({
@@ -17,7 +17,8 @@ export class SpecificRepoComponent {
   constructor(
     private specificRepoService: SpecificRepoService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
   ngOnInit() {
     this.route.paramMap.subscribe((params) => {
@@ -30,8 +31,6 @@ export class SpecificRepoComponent {
       .subscribe(({ data, loading }) => {
         this.loading = loading;
 
-        console.log(data.repository);
-
         if (data?.user) {
           this.ownerData = data.user;
           this.repoData = data.repository;
@@ -43,5 +42,17 @@ export class SpecificRepoComponent {
   }
   goBack() {
     this.location.back();
+  }
+  redirectToProfile() {
+    if (
+      (this,
+      this.ownerData &&
+        this.ownerData.__typename === 'User' &&
+        this.loading === false)
+    ) {
+      this.router.navigate(['/profile/' + this.owner]);
+    } else {
+      this.router.navigate(['/organization/' + this.owner]);
+    }
   }
 }

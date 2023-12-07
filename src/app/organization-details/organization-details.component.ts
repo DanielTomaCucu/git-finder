@@ -26,7 +26,6 @@ export class OrganizationDetailsComponent {
       .getOrganizationData(this.owner)
       .subscribe(({ data, loading }) => {
         if (data && data.organization) {
-          console.log(data.organization);
           this.orgDetails = data.organization;
         }
         this.loading = loading;
