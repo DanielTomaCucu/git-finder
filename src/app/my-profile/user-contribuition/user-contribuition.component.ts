@@ -8,9 +8,7 @@ import { Component, Input } from '@angular/core';
 })
 export class UserContribuitionComponent {
   @Input() contribuitions: any;
-  ngOnInit() {
-  console.log(this.contribuitions)
-}
+
   getWeeks() {
     return this.contribuitions.contributionCalendar?.weeks;
   }
