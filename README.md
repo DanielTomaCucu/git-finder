@@ -1,28 +1,17 @@
 # GitFinder
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.7.
+This project is a straightforward GitHub exploration app, utilizing GitHub's GraphQL API to display GitHub's top 10 repositories by stars and forks. It also enables easy user and organization searches. Simple in design, yet effective in delivering key GitHub insights, this tool provides a user-friendly way to navigate and understand GitHub's extensive data without the complexity of direct repository interactions or advanced features.
 
-## Development server
+# Purpose
+This project was developed as a hands-on exercise to learn more about integrating third-party APIs into Angular applications, as well as refining skills in Angular, GraphQL and Tailwind.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+All the Apis from Apollo GitHub: [https://studio.apollographql.com/public/github/variant/current/home]
 
-## Code scaffolding
+The project can be found here: [https://git-finder-hazel.vercel.app/]
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Overview
+![Screenshot 2023-12-07 at 13 27 56](https://github.com/DanielTomaCucu/git-finder/assets/61708051/e773ee84-1c23-499b-aa9a-b2094612a406)
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# git-finder
+# Features
+GitHub Stars Explorer: Harness the power of GitHub's GraphQL API in this cutting-edge application. Discover the top 10 repositories by stars and forks, unveiling the most influential and acclaimed projects. Enhanced User Search: Easily search and find detailed profiles of users and organizations. Data Visualization: Experience a dynamic view of GitHub's vast landscape. Responsive Design: Enjoy a seamless experience on various devices. API Efficiency: Expertly handles GitHub API rate limits, ensuring reliable data access and user interaction. Dive into the world of GitHub with precision and ease
