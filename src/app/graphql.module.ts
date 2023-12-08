@@ -4,6 +4,7 @@ import { APOLLO_OPTIONS } from 'apollo-angular';
 import { InMemoryCache } from '@apollo/client/core';
 import { HttpLink } from 'apollo-angular/http';
 import { ApolloLink } from '@apollo/client/core';
+import { environment } from './environment/environment.prod';
 
 const uri = 'https://api.github.com/graphql';
 
@@ -11,7 +12,7 @@ export function createApollo(httpLink: HttpLink) {
   const authLink = new ApolloLink((operation, forward) => {
     operation.setContext({
       headers: {
-        Authorization: `Bearer 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`,
+        Authorization: `Bearer ${environment.githubToken}`,
       },
     });
     return forward(operation);
