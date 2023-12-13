@@ -10,7 +10,6 @@ import { environment } from '../environments/environment';
 const uri = 'https://api.github.com/graphql';
 
 export function createApollo(httpLink: HttpLink) {
-  console.log(environment.githubToken);
   const authLink = new ApolloLink((operation, forward) => {
     operation.setContext({
       headers: {
